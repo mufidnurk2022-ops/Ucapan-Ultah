@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, Fajar! 🥤</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF7EA;
+    --orange:#FF7A3C;
+    --orange-deep:#E8531C;
+    --green:#3FA66B;
+    --green-pop:#9FE870;
+    --ink:#23211D;
+    --brown:#5B3A29;
+    --bubble:#FFD24C;
+    --shadow:#1A1814;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Bricolage Grotesque', sans-serif;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Fredoka', sans-serif;
+    font-weight:700;
+  }
+
+  /* ---------- background texture ---------- */
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index:1;
+    opacity:0.05; mix-blend-mode:multiply;
+    background-image:radial-gradient(var(--ink) 1px, transparent 1px);
+    background-size:3px 3px;
+  }
+
+  .bubbles-bg{
+    position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;
+  }
+  .bg-bubble{
+    position:absolute; border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0));
+    opacity:0.5;
+    animation:rise linear infinite;
+  }
+  @keyframes rise{
+    0%{ transform:translateY(0) translateX(0); opacity:0; }
+    10%{ opacity:0.6; }
+    100%{ transform:translateY(-110vh) translateX(20px); opacity:0; }
+  }
+
+  /* ---------- nav dots ---------- */
+  .progress{
+    position:fixed; right:18px; top:50%; transform:translateY(-50%);
+    z-index:50; display:flex; flex-direction:column; gap:10px;
+  }
+  .progress span{
+    width:9px; height:9px; border-radius:50%;
+    background:rgba(35,33,29,0.18);
+    transition:background .3s, transform .3s;
+  }
+  .progress span.active{ background:var(--orange-deep); transform:scale(1.3); }
+  @media (max-width:720px){ .progress{ display:none; } }
+
+  section{
+    position:relative; z-index:2;
+    min-height:100svh;
+    display:flex; align-items:center; justify-content:center;
+    padding:80px 24px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    flex-direction:column;
+    text-align:center;
+    gap:28px;
+    padding-top:60px;
+  }
+
+  .eyebrow-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--ink); color:var(--cream);
+    padding:8px 18px; border-radius:100px;
+    font-family:'Fredoka',sans-serif; font-size:14px; font-weight:600;
+    letter-spacing:0.04em;
+    transform:rotate(-2deg);
+  }
+  .eyebrow-tag .dot{ width:7px; height:7px; border-radius:50%; background:var(--green-pop); }
+
+  .hero-title{
+    font-size:clamp(3rem, 11vw, 7.5rem);
+    line-height:0.92;
+    color:var(--orange-deep);
+    -webkit-text-stroke:3px var(--ink);
+    text-shadow:6px 6px 0 var(--ink);
+    letter-spacing:-0.01em;
+  }
+  .hero-title .line2{
+    color:var(--cream);
+    -webkit-text-stroke:3px var(--ink);
+    text-shadow:6px 6px 0 var(--ink);
+  }
+
+  .hero-sub{
+    max-width:560px;
+    font-size:clamp(1rem, 2.2vw, 1.25rem);
+    line-height:1.6;
+    color:var(--brown);
+    font-weight:600;
+  }
+
+  /* polaroid photo stack in hero */
+  .photo-stack{
+    position:relative;
+    width:min(78vw, 300px);
+    height:min(78vw, 300px);
+    margin:18px auto 6px;
+  }
+  .polaroid{
+    position:absolute; inset:0;
+    background:#fff;
+    border-radius:10px;
+    padding:14px 14px 46px 14px;
+    box-shadow:0 18px 30px rgba(26,24,20,0.25);
+    border:2px solid var(--ink);
+  }
+  .polaroid img{
+    width:100%; height:100%; object-fit:cover; border-radius:4px;
+    display:block;
+  }
+  .polaroid.p1{ transform:rotate(-9deg) translate(-10px,4px); z-index:2; }
+  .polaroid.p2{ transform:rotate(8deg) translate(14px,-6px); z-index:1; }
+  .polaroid figcaption{
+    position:absolute; bottom:10px; left:0; right:0; text-align:center;
+    font-family:'Fredoka', sans-serif; font-size:13px; color:var(--brown); font-weight:600;
+  }
+
+  .scroll-hint{
+    margin-top:10px;
+    font-family:'Fredoka', sans-serif; font-weight:600; font-size:14px;
+    color:var(--brown); opacity:0.75;
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+  }
+  .scroll-hint .arrow{ animation:bob 1.6s ease-in-out infinite; font-size:18px; }
+  @keyframes bob{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(8px);} }
+
+  /* ---------- shared section styling ---------- */
+  .section-inner{
+    width:100%; max-width:920px;
+    display:flex; flex-direction:column; align-items:center; gap:26px;
+    text-align:center;
+  }
+  .label-chip{
+    font-family:'Fredoka', sans-serif; font-weight:600; font-size:13px;
+    letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--orange-deep);
+    background:rgba(255,122,60,0.12);
+    border:1.5px solid var(--orange-deep);
+    padding:6px 16px; border-radius:100px;
+  }
+  .section-title{
+    font-size:clamp(2rem, 5.5vw, 3.4rem);
+    color:var(--ink);
+    line-height:1.05;
+  }
+
+  /* ---------- STRAW / messages section ---------- */
+  .straw-section{ background:var(--orange); }
+  .cup-wrap{
+    position:relative;
+    width:min(86vw, 340px);
+  }
+  .cup{
+    position:relative;
+    background:linear-gradient(180deg, rgba(255,255,255,0.5), rgba(255,255,255,0.15));
+    border:3px solid var(--ink);
+    border-radius:0 0 50px 50px / 0 0 70px 70px;
+    height:260px;
+    overflow:hidden;
+    backdrop-filter:blur(2px);
+  }
+  .cup::before{
+    content:"";
+    position:absolute; left:0; right:0; bottom:0; height:78%;
+    background:repeating-linear-gradient(45deg, var(--green-pop), var(--green-pop) 14px, var(--green) 14px, var(--green) 28px);
+    opacity:0.85;
+  }
+  .fizz{
+    position:absolute; bottom:0; left:0; right:0; height:78%;
+  }
+  .fizz span{
+    position:absolute; bottom:-10px; width:6px; height:6px; border-radius:50%;
+    background:rgba(255,255,255,0.85);
+    animation:fizz-up 3s ease-in infinite;
+  }
+  @keyframes fizz-up{
+    0%{ transform:translateY(0) scale(0.6); opacity:0; }
+    15%{ opacity:1; }
+    100%{ transform:translateY(-180px) scale(1.1); opacity:0; }
+  }
+  .straw-deco{
+    position:absolute; top:-70px; left:50%; transform:translateX(-30px) rotate(14deg);
+    width:14px; height:150px;
+    background:repeating-linear-gradient(180deg, var(--cream), var(--cream) 10px, var(--orange-deep) 10px, var(--orange-deep) 20px);
+    border:2px solid var(--ink);
+    border-radius:8px;
+  }
+
+  .msg-card{
+    background:var(--cream);
+    border:2.5px solid var(--ink);
+    border-radius:18px;
+    padding:26px 24px;
+    max-width:560px;
+    box-shadow:7px 7px 0 var(--ink);
+    font-size:1.05rem; line-height:1.7; color:var(--ink);
+    font-weight:500;
+  }
+  .msg-card strong{ color:var(--orange-deep); }
+  .msg-card .from{
+    display:block; margin-top:16px; font-family:'Fredoka',sans-serif; font-weight:600;
+    color:var(--brown);
+  }
+
+  /* ---------- WISH GRID ---------- */
+  .wish-section{ background:var(--cream); }
+  .wish-grid{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(160px,1fr));
+    gap:18px;
+    width:100%;
+    max-width:680px;
+  }
+  @media (max-width:560px){ .wish-grid{ grid-template-columns:1fr; } }
+  .wish-card{
+    background:#fff;
+    border:2.5px solid var(--ink);
+    border-radius:16px;
+    padding:22px 20px;
+    text-align:left;
+    box-shadow:5px 5px 0 var(--ink);
+    transition:transform .25s ease, box-shadow .25s ease;
+    cursor:default;
+  }
+  .wish-card:hover{
+    transform:translate(-3px,-3px);
+    box-shadow:8px 8px 0 var(--ink);
+  }
+  .wish-card .ic{ font-size:1.8rem; display:block; margin-bottom:10px; }
+  .wish-card h3{ font-family:'Fredoka',sans-serif; font-size:1.1rem; margin-bottom:6px; color:var(--orange-deep); }
+  .wish-card p{ font-size:0.92rem; line-height:1.55; color:var(--brown); font-weight:500; }
+
+  /* ---------- INTERACTIVE CANDLE/STRAW BLOW SECTION ---------- */
+  .blow-section{ background:var(--ink); color:var(--cream); flex-direction:column; gap:30px; }
+  .blow-section .section-title{ color:var(--cream); }
+  .blow-section .label-chip{ background:rgba(159,232,112,0.15); color:var(--green-pop); border-color:var(--green-pop); }
+
+  .glass-scene{
+    width:min(80vw, 260px);
+    position:relative;
+    user-select:none;
+  }
+  .glass{
+    position:relative;
+    height:220px;
+    border:3px solid var(--cream);
+    border-radius:0 0 40px 40px / 0 0 60px 60px;
+    overflow:hidden;
+    background:rgba(255,247,234,0.05);
+  }
+  .soda-level{
+    position:absolute; left:0; right:0; bottom:0;
+    height:75%;
+    background:linear-gradient(180deg, var(--bubble), var(--orange-deep));
+    transition:height 1.4s cubic-bezier(.4,0,.2,1);
+  }
+  .glass.popped .soda-level{ height:0%; }
+  .straw2{
+    position:absolute; top:-60px; left:50%; transform:translateX(10px) rotate(-12deg);
+    width:13px; height:140px;
+    background:repeating-linear-gradient(180deg, var(--cream), var(--cream) 9px, var(--green) 9px, var(--green) 18px);
+    border:2px solid var(--cream);
+    border-radius:8px;
+    z-index:3;
+  }
+  .blow-btn{
+    margin-top:8px;
+    font-family:'Fredoka',sans-serif; font-weight:600; font-size:1rem;
+    background:var(--green-pop); color:var(--ink);
+    border:2.5px solid var(--cream);
+    padding:14px 30px; border-radius:100px;
+    cursor:pointer;
+    box-shadow:5px 5px 0 var(--cream);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .blow-btn:hover{ transform:translate(-2px,-2px); box-shadow:7px 7px 0 var(--cream); }
+  .blow-btn:active{ transform:translate(2px,2px); box-shadow:2px 2px 0 var(--cream); }
+  .blow-btn:disabled{ opacity:0.5; cursor:default; }
+
+  .reveal-msg{
+    max-width:480px;
+    font-size:1.15rem; line-height:1.7; font-weight:600;
+    opacity:0; transform:translateY(10px);
+    transition:opacity .6s ease, transform .6s ease;
+    color:var(--bubble);
+  }
+  .reveal-msg.show{ opacity:1; transform:translateY(0); }
+
+  /* ---------- FOOTER / SIGNOFF ---------- */
+  .footer-section{
+    background:var(--green);
+    flex-direction:column; gap:16px;
+    color:var(--cream);
+    text-align:center;
+  }
+  .footer-section .big{
+    font-family:'Fredoka',sans-serif; font-size:clamp(2rem,6vw,3.4rem);
+    line-height:1.05;
+  }
+  .footer-section p{ max-width:480px; font-weight:500; line-height:1.6; opacity:0.95; }
+  .footer-note{ font-size:0.85rem; opacity:0.75; margin-top:18px; font-weight:500; }
+
+  /* confetti canvas */
+  #confetti-canvas{
+    position:fixed; inset:0; z-index:60; pointer-events:none;
+  }
+
+  ::selection{ background:var(--orange-deep); color:var(--cream); }
+
+  :focus-visible{
+    outline:3px solid var(--green-pop);
+    outline-offset:3px;
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="bubbles-bg" id="bgBubbles"></div>
+<canvas id="confetti-canvas"></canvas>
+
+<nav class="progress" id="progressDots">
+  <span data-i="0" class="active"></span>
+  <span data-i="1"></span>
+  <span data-i="2"></span>
+  <span data-i="3"></span>
+  <span data-i="4"></span>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="sec0">
+  <div class="section-inner">
+    <span class="eyebrow-tag"><span class="dot"></span> EDISI KHUSUS · 19 JUNI</span>
+
+    <h1 class="hero-title display">SELAMAT<br><span class="line2">ULANG TAHUN</span></h1>
+
+    <div class="photo-stack">
+      <figure class="polaroid p2">
+        <img src="images/foto2.jpeg" alt="Fajar lagi nyeruput minuman pakai sedotan ijo, live di TikTok">
+        <figcaption>nyeruput santai 🥤</figcaption>
+      </figure>
+      <figure class="polaroid p1">
+        <img src="images/foto1.jpeg" alt="Fajar close-up lagi minum pakai sedotan">
+        <figcaption>khas banget kan? 😄</figcaption>
+      </figure>
+    </div>
+
+    <p class="hero-sub">Buat <strong style="color:var(--orange-deep)">Fajar</strong> — yang paling jago bikin momen receh jadi ikonik, bahkan cuma dari acara minum doang. Hari ini hari spesialmu. Scroll yuk, ada sedikit kejutan. 👇</p>
+
+    <div class="scroll-hint"><span>geser ke bawah</span><span class="arrow">↓</span></div>
+  </div>
+</section>
+
+<!-- ===================== MESSAGE / STRAW SECTION ===================== -->
+<section class="straw-section" id="sec1">
+  <div class="section-inner">
+    <span class="label-chip" style="background:#fff;">Tegukan Pertama</span>
+    <h2 class="section-title display" style="color:var(--ink);">Sebelum semuanya dimulai...</h2>
+
+    <div class="cup-wrap">
+      <div class="straw-deco"></div>
+      <div class="cup">
+        <div class="fizz">
+          <span style="left:18%; animation-delay:0s;"></span>
+          <span style="left:38%; animation-delay:0.6s;"></span>
+          <span style="left:58%; animation-delay:1.1s;"></span>
+          <span style="left:75%; animation-delay:1.7s;"></span>
+          <span style="left:28%; animation-delay:2.2s;"></span>
+          <span style="left:65%; animation-delay:2.6s;"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      Setahun lagi sudah terlewati, Jar. Dari yang awalnya cuma video receh sambil nyeruput minuman, sampai jadi orang yang selalu bikin suasana jadi cair (literally, kayak es yang kamu minum itu). Semoga di umur yang baru ini, segala rencana lancar, rezekinya makin deras kayak soda yang nggak abis-abis, dan tetap jadi Fajar yang santai tapi diandalkan.
+      <span class="from">— dari kami yang selalu nungguin update receh-mu 🥤</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WISH GRID ===================== -->
+<section class="wish-section" id="sec2">
+  <div class="section-inner">
+    <span class="label-chip">Resep Doa Hari Ini</span>
+    <h2 class="section-title display">Racikan Harapan Buat Fajar</h2>
+
+    <div class="wish-grid">
+      <div class="wish-card">
+        <span class="ic">🎯</span>
+        <h3>Fokus & Cuan</h3>
+        <p>Semoga apa pun yang sedang dikejar — kerjaan, kuliah, atau cita-cita — tahun ini makin dekat ke garis finis.</p>
+      </div>
+      <div class="wish-card">
+        <span class="ic">😄</span>
+        <h3>Tetap Receh</h3>
+        <p>Jangan berubah jadi terlalu serius. Dunia butuh lebih banyak orang yang bisa bikin video minum jadi konten.</p>
+      </div>
+      <div class="wish-card">
+        <span class="ic">💪</span>
+        <h3>Sehat Selalu</h3>
+        <p>Minum yang cukup ya — bukan cuma yang manis-manis dari gelas plastik itu, air putih juga, Jar.</p>
+      </div>
+      <div class="wish-card">
+        <span class="ic">🌟</span>
+        <h3>Dikelilingi Orang Baik</h3>
+        <p>Semoga makin banyak orang baik yang nemenin langkahmu, dan yang toxic makin menjauh sendiri.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== INTERACTIVE BLOW SECTION ===================== -->
+<section class="blow-section" id="sec3">
+  <div class="section-inner">
+    <span class="label-chip">Momen Spesial</span>
+    <h2 class="section-title display">Sekali Sedot, Satu Permintaan</h2>
+    <p style="max-width:440px; font-weight:500; opacity:0.85;">Klik tombolnya, anggap aja kayak lagi nyeruput soda terakhir di gelas. Lihat apa yang muncul. 🥤✨</p>
+
+    <div class="glass-scene">
+      <div class="straw2"></div>
+      <div class="glass" id="glassEl">
+        <div class="soda-level" id="sodaLevel"></div>
+      </div>
+    </div>
+
+    <button class="blow-btn" id="blowBtn">Sedot sampai habis 🥤</button>
+
+    <p class="reveal-msg" id="revealMsg">Kayak gelas ini, semoga semua beban dan capekmu tahun lalu juga ikut "habis tersedot" — dan tahun barumu dimulai dari gelas yang bersih, penuh sama hal-hal baik. Happy birthday, Fajar! 🎉</p>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<section class="footer-section" id="sec4">
+  <div class="section-inner">
+    <div class="big display">Selamat Ulang Tahun,<br>Fajar! 🎂</div>
+    <p>Semoga umur baru ini bawa lebih banyak alasan buat senyum, lebih sedikit alasan buat capek, dan tetap dikelilingi orang-orang yang nyeruput kebahagiaan bareng kamu.</p>
+    <div class="footer-note">dibuat dengan receh & sayang, khusus buat Fajar — 19 Juni</div>
+  </div>
+</section>
+
+<script>
+  // ---------- background floating bubbles ----------
+  const bgWrap = document.getElementById('bgBubbles');
+  const bubbleCount = window.innerWidth < 600 ? 10 : 18;
+  for(let i=0;i<bubbleCount;i++){
+    const b = document.createElement('div');
+    b.className = 'bg-bubble';
+    const size = 6 + Math.random()*16;
+    b.style.width = size+'px';
+    b.style.height = size+'px';
+    b.style.left = Math.random()*100+'vw';
+    b.style.animationDuration = (10 + Math.random()*14)+'s';
+    b.style.animationDelay = (Math.random()*14)+'s';
+    bgWrap.appendChild(b);
+  }
+
+  // ---------- scroll progress dots ----------
+  const sections = [...document.querySelectorAll('section')];
+  const dots = [...document.querySelectorAll('#progressDots span')];
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const idx = sections.indexOf(entry.target);
+        dots.forEach(d=>d.classList.remove('active'));
+        if(dots[idx]) dots[idx].classList.add('active');
+      }
+    });
+  }, { threshold:0.5 });
+  sections.forEach(s=>io.observe(s));
+
+  dots.forEach(d=>{
+    d.addEventListener('click', ()=>{
+      const i = +d.dataset.i;
+      sections[i].scrollIntoView({behavior:'smooth'});
+    });
+  });
+
+  // ---------- blow / drink interaction ----------
+  const blowBtn = document.getElementById('blowBtn');
+  const glassEl = document.getElementById('glassEl');
+  const revealMsg = document.getElementById('revealMsg');
+
+  blowBtn.addEventListener('click', ()=>{
+    if(blowBtn.disabled) return;
+    blowBtn.disabled = true;
+    glassEl.classList.add('popped');
+    blowBtn.textContent = 'Habis! 🎉';
+    setTimeout(()=>{
+      revealMsg.classList.add('show');
+      launchConfetti();
+    }, 700);
+  });
+
+  // ---------- confetti burst ----------
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx = canvas.getContext('2d');
+  function resizeCanvas(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  const colors = ['#FF7A3C','#E8531C','#3FA66B','#9FE870','#FFD24C','#FFF7EA'];
+
+  function launchConfetti(){
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduceMotion) return;
+
+    const particles = [];
+    const count = window.innerWidth < 600 ? 70 : 140;
+    for(let i=0;i<count;i++){
+      particles.push({
+        x: canvas.width/2 + (Math.random()-0.5)*120,
+        y: canvas.height*0.4,
+        vx: (Math.random()-0.5)*10,
+        vy: -Math.random()*10 - 4,
+        size: 5 + Math.random()*6,
+        color: colors[Math.floor(Math.random()*colors.length)],
+        rot: Math.random()*Math.PI,
+        vrot: (Math.random()-0.5)*0.3,
+        shape: Math.random() > 0.5 ? 'rect' : 'circle'
+      });
+    }
+
+    let frame = 0;
+    const maxFrames = 130;
+
+    function tick(){
+      frame++;
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      particles.forEach(p=>{
+        p.vy += 0.28;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.vrot;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle = p.color;
+        if(p.shape === 'rect'){
+          ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size*0.6);
+        } else {
+          ctx.beginPath();
+          ctx.arc(0,0,p.size/2,0,Math.PI*2);
+          ctx.fill();
+        }
+        ctx.restore();
+      });
+      if(frame < maxFrames){
+        requestAnimationFrame(tick);
+      } else {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+</script>
+
+</body>
+</html>
