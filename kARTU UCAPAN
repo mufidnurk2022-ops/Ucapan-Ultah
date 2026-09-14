@@ -1,0 +1,214 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyMJ9ZV62Yv5XIqDPS54a/VK",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/mufidnurk2022-ops/Ucapan-Ultah/blob/main/kARTU%20UCAPAN\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "8f195d76"
+      },
+      "source": [
+        "First, I'll generate the HTML content for your greeting card."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "2eeaa550",
+        "outputId": "9fa7459f-b411-4dd2-d4d8-2cb5843512a0"
+      },
+      "source": [
+        "html_content = \"\"\"\n",
+        "<!DOCTYPE html>\n",
+        "<html lang=\"en\">\n",
+        "<head>\n",
+        "    <meta charset=\"UTF-8\">\n",
+        "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n",
+        "    <title>Greeting Card for KAJABIR</title>\n",
+        "    <link rel=\"stylesheet\" href=\"style.css\">\n",
+        "</head>\n",
+        "<body>\n",
+        "    <div class=\"card-container\">\n",
+        "        <div class=\"card\">\n",
+        "            <div class=\"header-image\">\n",
+        "                <img src=\"/content/Buzz Lightyear is a toy based on a Space Ranger from Toy Box who is a party member in Kingdom Hearts II… _ Toy story characters, Woody toy story, Toy story birthday.jpg\" alt=\"Toy Story Header\" class=\"card-header-img\">\n",
+        "            </div>\n",
+        "            <div class=\"card-content\">\n",
+        "                <h1>to KAJABIR</h1>\n",
+        "                <p>Makasih banyak my Kajabir atau super duper jendril yang udah mau menerima aku sebagai dejabir, maaf banget kalo aku sebagai dejabir yang plenger emang soalnya bawaan dari kecil tetapi walupun begitu aku tetep bakal jadi dejabir yang baik kepada kajabirnya nanti kalau super duper jendril lagi susah aku siap membantu kapan pun itu dan juga untuk komitmen komitmen yang aku siapkan semoga bisa terlaksana dan membanggakan semoga ini berkesan love kajabir</p>\n",
+        "            </div>\n",
+        "            <div class=\"footer-image\">\n",
+        "                <img src=\"/content/download.jpg\" alt=\"Toy Story Footer\" class=\"card-footer-img\">\n",
+        "            </div>\n",
+        "        </div>\n",
+        "    </div>\n",
+        "</body>\n",
+        "</html>\n",
+        "\"\"\"\n",
+        "\n",
+        "with open('greeting_card.html', 'w') as f:\n",
+        "    f.write(html_content)\n",
+        "print(\"Generated greeting_card.html\")"
+      ],
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Generated greeting_card.html\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "66852c26"
+      },
+      "source": [
+        "Next, I'll create the CSS file to style the card with a Toy Story theme."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "1befe392",
+        "outputId": "04a45cdf-169d-47fd-b453-1c1b9513b499"
+      },
+      "source": [
+        "css_content = \"\"\"\n",
+        "body {\n",
+        "    font-family: 'Comic Sans MS', cursive, sans-serif;\n",
+        "    background-color: #add8e6; /* Light blue, like Andy's room sky */\n",
+        "    display: flex;\n",
+        "    justify-content: center;\n",
+        "    align-items: center;\n",
+        "    min-height: 100vh;\n",
+        "    margin: 0;\n",
+        "    background-image: url('/content/caixa aplique toy story 1 - OrigamiAmi.jpg');\n",
+        "    background-size: cover;\n",
+        "    background-position: center;\n",
+        "    background-repeat: no-repeat;\n",
+        "}\n",
+        "\n",
+        ".card-container {\n",
+        "    perspective: 1000px;\n",
+        "}\n",
+        "\n",
+        ".card {\n",
+        "    width: 600px;\n",
+        "    max-width: 90%;\n",
+        "    background-color: #fff;\n",
+        "    border-radius: 15px;\n",
+        "    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);\n",
+        "    overflow: hidden;\n",
+        "    text-align: center;\n",
+        "    position: relative;\n",
+        "    transform-style: preserve-3d;\n",
+        "    transition: transform 0.8s;\n",
+        "}\n",
+        "\n",
+        ".card:hover {\n",
+        "    transform: rotateY(10deg) rotateX(5deg) scale(1.02);\n",
+        "}\n",
+        "\n",
+        ".header-image, .footer-image {\n",
+        "    width: 100%;\n",
+        "    height: 150px;\n",
+        "    overflow: hidden;\n",
+        "}\n",
+        "\n",
+        ".card-header-img {\n",
+        "    width: 100%;\n",
+        "    height: 100%;\n",
+        "    object-fit: cover;\n",
+        "    object-position: center;\n",
+        "    border-top-left-radius: 15px;\n",
+        "    border-top-right-radius: 15px;\n",
+        "}\n",
+        "\n",
+        ".card-footer-img {\n",
+        "    width: 100%;\n",
+        "    height: 100%;\n",
+        "    object-fit: cover;\n",
+        "    object-position: center;\n",
+        "    border-bottom-left-radius: 15px;\n",
+        "    border-bottom-right-radius: 15px;\n",
+        "}\n",
+        "\n",
+        ".card-content {\n",
+        "    padding: 30px;\n",
+        "    color: #333;\n",
+        "}\n",
+        "\n",
+        "h1 {\n",
+        "    color: #e44d26; /* Woody's bandanna red */\n",
+        "    font-size: 2.5em;\n",
+        "    margin-bottom: 20px;\n",
+        "    text-shadow: 2px 2px #ffeb3b; /* Yellow like Buzz's suit details */\n",
+        "}\n",
+        "\n",
+        "p {\n",
+        "    font-size: 1.2em;\n",
+        "    line-height: 1.6;\n",
+        "    color: #555;\n",
+        "}\n",
+        "\"\"\"\n",
+        "\n",
+        "with open('style.css', 'w') as f:\n",
+        "    f.write(css_content)\n",
+        "print(\"Generated style.css\")"
+      ],
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Generated style.css\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "f5387137"
+      },
+      "source": [
+        "You can now download `greeting_card.html` and `style.css` from the file explorer on the left. Open `greeting_card.html` in your web browser to view your personalized greeting card!"
+      ]
+    }
+  ]
+}
